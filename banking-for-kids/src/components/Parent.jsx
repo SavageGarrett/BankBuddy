@@ -1,10 +1,14 @@
-import React from 'react';
+import React from "react";
+import { Container, Row, Col, Text } from "react-bootstrap";
+import { Grid, Typography, Link as ButtonLink } from "@material-ui/core";
+const Parent = () => {
+  return (
+    <Container>
+      <Row>
+        <Typography>I am a kid!</Typography>
+      </Row>
+    </Container>
+  );
+};
 
-function Parent()
-{
-    return (
-        <h1>I am a parent!</h1>
-    )
-}
-
-export default Parent
+export default Parent;

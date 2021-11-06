@@ -1,10 +1,7 @@
-import React from 'react'
+import React from "react";
 
-function Kid()
-{
-    return (
-        <h1>I am a kid!</h1>
-    )
-}
+const Kid = () => {
+  return <text>I am a kid!</text>;
+};
 
-export default Kid
+export default Kid;

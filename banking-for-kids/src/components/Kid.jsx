@@ -1,14 +1,14 @@
 import React from "react";
-import {Container, Row, Col} from 'react-bootstrap'
+import { Container, Row, Col, Text } from "react-bootstrap";
+import { Grid, Typography, Link as ButtonLink } from "@material-ui/core";
 
 const Kid = () => {
   return (
-      <Container>
-          <Row>
-            <Col></Col>
-            <Col>2 of 2</Col>
-          </Row>
-      </Container>
+    <Container>
+      <Row>
+        <Typography>I am a kid!</Typography>
+      </Row>
+    </Container>
   );
 };
 

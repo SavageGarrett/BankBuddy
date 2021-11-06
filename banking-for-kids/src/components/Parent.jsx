@@ -1,12 +1,20 @@
-import React from "react";
-import { Container, Row, Col, Text } from "react-bootstrap";
-import { Grid, Typography, Link as ButtonLink } from "@material-ui/core";
+import React, { useState } from "react";
+import { Container, Row } from "react-bootstrap";
+import { Typography, Button } from "@material-ui/core";
+import SimpleModal from "./ParentComponents/SimpleModal";
+
 const Parent = () => {
+  const [openModal, setOpenModal] = useState(false);
   return (
     <Container>
       <Row>
-        <Typography>I am a kid!</Typography>
+        <Typography>I am a parent!</Typography>
       </Row>
+      <Button onClick={() => setOpenModal(true)}>POST A TASK</Button>
+      <SimpleModal
+        handleClose={() => setOpenModal(false)}
+        handleOpen={openModal}
+      />
     </Container>
   );
 };

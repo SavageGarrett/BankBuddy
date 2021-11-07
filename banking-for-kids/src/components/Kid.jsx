@@ -1,4 +1,4 @@
-import React, {useState} from "react";
+import React, { useEffect, useState } from "react";
 import { Container, Row, Col, Image, ListGroup, Badge } from "react-bootstrap";
 import { Typography } from "@material-ui/core";
 import ShowChartIcon from "@mui/icons-material/ShowChart";
@@ -11,10 +11,36 @@ import "./Task.css";
 
 const Kid = () => {
   let taskList = [];
-  taskList.push({ price: 3.99, name: "Do Dishes", infoLine: "More Info" })
-  taskList.push({ price: 6.99, name: "Clean Room", infoLine: "More Info" })
-  taskList.push({ price: 8.99, name: "Vacuum", infoLine: "More Info" })
-  console.log(taskList)
+  taskList.push({ price: 3.99, name: "Do Dishes", infoLine: "More Info" });
+  taskList.push({ price: 6.99, name: "Clean Room", infoLine: "More Info" });
+  taskList.push({ price: 8.99, name: "Vacuum", infoLine: "More Info" });
+
+  useEffect(() => {
+    var axios = require("axios");
+    var data = JSON.stringify({
+      user_id: 2,
+    });
+
+    var config = {
+      method: "get",
+      url: "https://c7j9xga7y9.execute-api.us-east-1.amazonaws.com/default/gettersetter",
+      headers: {
+        "x-api-key": "hkW0Vha0KA8GH60qfJmv88h8EAJx8VNp5Fgpem2G",
+        "Content-Type": "application/json",
+      },
+      data: JSON.stringify({
+        user_id: 2,
+      }),
+    };
+
+    axios(config)
+      .then(function (response) {
+        console.log(JSON.stringify(response.data));
+      })
+      .catch(function (error) {
+        console.log(error);
+      });
+  });
 
   return (
     <Container className="Kid-Container">
@@ -67,8 +93,15 @@ const Kid = () => {
         {/* Tasks List */}
         <Col className="align-items-center ">
           <ListGroup as="ol" numbered>
-            {taskList.map(({price, name, infoLine}) => {
-              return <Task key={name} price={price} name={name} infoLine={infoLine}></Task>
+            {taskList.map(({ price, name, infoLine }) => {
+              return (
+                <Task
+                  key={name}
+                  price={price}
+                  name={name}
+                  infoLine={infoLine}
+                ></Task>
+              );
             })}
           </ListGroup>
         </Col>

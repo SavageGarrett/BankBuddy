@@ -16,16 +16,29 @@ const Parent = () => {
   //   const [openModal, setOpenModal] = useState(false);
   const [description, setDescription] = useState("");
   const [number, setNumber] = useState(0);
-  //   const [taskInfo, setTaskInfo] = useState(0);
+  const [title, setTitle] = useState("");
+  const [taskList, setTaskList] = useState([]);
 
   let tasks = [];
 
   const addTask = () => {
     console.log(description);
-    tasks.push({ description: description, number: number });
+    //post task
+    tasks.push({ title: title, description: description, number: number });
     setDescription("");
-    setNumber("");
+    setTitle("");
+    setNumber(0);
+
     console.log(tasks);
+  };
+  const handleDescription = (e) => {
+    setDescription(e.target.value);
+  };
+  const handleNumber = (e) => {
+    setNumber(e.target.value);
+  };
+  const handleTitle = (e) => {
+    setTitle(e.target.value);
   };
   return (
     <Container>
@@ -39,15 +52,20 @@ const Parent = () => {
         </Row>
         <Row>
           <TextField
+            label="Title"
+            value={title.toString()}
+            onChange={handleTitle}
+          />
+          <TextField
             label="Description"
-            // value={description}
-            onChangeText={(e) => setDescription(e.target.value)}
+            value={description.toString()}
+            onChange={handleDescription}
           />
           <Col>
             <TextField
               label="Point Value"
-              //   value={number}
-              onChangeText={(e) => setNumber(e.target.value)}
+              value={number.toString()}
+              onChange={handleNumber}
             />
           </Col>
         </Row>

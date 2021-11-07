@@ -20,12 +20,12 @@ function App() {
           <Toolbar>
             <Grid container>
               <Grid item xs={6}>
-                <Button onClick={() => setKid(false)}>Parent Portal</Button>
-              </Grid>
-              <Grid item xs={6}>
                 <Button color="inherit" onClick={() => setKid(true)}>
                   Kid Account
                 </Button>
+              </Grid>
+              <Grid item xs={6}>
+                <Button onClick={() => setKid(false)}>Parent Portal</Button>
               </Grid>
             </Grid>
           </Toolbar>

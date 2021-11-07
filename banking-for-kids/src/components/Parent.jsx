@@ -15,7 +15,7 @@ import CloseIcon from "@mui/icons-material/Close";
 const Parent = () => {
   //   const [openModal, setOpenModal] = useState(false);
   const [description, setDescription] = useState("");
-  const [number, setNumber] = useState(0);
+  const [number, setNumber] = useState("$");
   const [title, setTitle] = useState("");
   const [taskList, setTaskList] = useState([]);
 
@@ -24,10 +24,15 @@ const Parent = () => {
   const addTask = () => {
     console.log(description);
     //post task
-    tasks.push({ title: title, description: description, number: number });
+    tasks.push({
+      title: title,
+      description: description,
+      price: number,
+      completed: false,
+    });
     setDescription("");
     setTitle("");
-    setNumber(0);
+    setNumber("$");
 
     console.log(tasks);
   };
@@ -63,7 +68,7 @@ const Parent = () => {
           />
           <Col>
             <TextField
-              label="Point Value"
+              label="Cost (dollars)"
               value={number.toString()}
               onChange={handleNumber}
             />

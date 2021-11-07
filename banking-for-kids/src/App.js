@@ -5,7 +5,7 @@ import Kid from "./components/Kid";
 import Parent from "./components/Parent";
 import { Nav } from "react-bootstrap";
 import { ThemeProvider } from "@material-ui/core/styles";
-import CssBaseline from "@material-ui/core/CssBaseline";
+import { Toolbar, AppBar, Button, Grid } from "@material-ui/core";
 import theme from "./theme";
 
 function App() {
@@ -15,14 +15,20 @@ function App() {
   return (
     <ThemeProvider theme={theme}>
       <div className="App">
-        <Nav>
-          <Nav.Item>
-            <Nav.Link onClick={() => setKid(false)}>Parent</Nav.Link>
-          </Nav.Item>
-          <Nav.Item>
-            <Nav.Link onClick={() => setKid(true)}>Kid</Nav.Link>
-          </Nav.Item>
-        </Nav>
+        <AppBar position="static">
+          <Toolbar>
+            <Grid container>
+              <Grid item xs={6}>
+                <Button onClick={() => setKid(false)}>Parent Portal</Button>
+              </Grid>
+              <Grid item xs={6}>
+                <Button color="inherit" onClick={() => setKid(true)}>
+                  Kid Account
+                </Button>
+              </Grid>
+            </Grid>
+          </Toolbar>
+        </AppBar>
         {kid ? <Kid /> : <Parent />}
       </div>
     </ThemeProvider>

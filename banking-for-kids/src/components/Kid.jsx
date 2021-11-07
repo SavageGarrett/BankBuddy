@@ -1,13 +1,13 @@
 import React from "react";
-import { Container, Row, Col, Text, Image, ListGroup, Badge } from "react-bootstrap";
-import { Grid, Typography, Link as ButtonLink } from "@material-ui/core";
+import { Container, Row, Col, Image, ListGroup, Badge } from "react-bootstrap";
+import { Typography } from "@material-ui/core";
+import ShowChartIcon from "@mui/icons-material/ShowChart";
+import BusinessCenterIcon from "@mui/icons-material/BusinessCenter";
+import MonetizationOnIcon from "@mui/icons-material/MonetizationOn";
+import CloseIcon from "@mui/icons-material/Close";
+import theme from "../theme";
 
-import ShowChartIcon from '@mui/icons-material/ShowChart';
-import BusinessCenterIcon from '@mui/icons-material/BusinessCenter';
-import MonetizationOnIcon from '@mui/icons-material/MonetizationOn';
-import CloseIcon from '@mui/icons-material/Close';
-
-import "./Task.css"
+import "./Task.css";
 
 const Kid = () => {
   return (
@@ -15,9 +15,12 @@ const Kid = () => {
       <Row>
         <Col className="align-items-center">
           {/* Profile Image and Name */}
-          <Image style={{width: "120px", height: "120px", borderRadius: "60px"}} src="img/kid-1.jpg"></Image>
+          <Image
+            style={{ width: "120px", height: "120px", borderRadius: "60px" }}
+            src="img/kid-1.jpg"
+          ></Image>
           <Typography>Harold Smith</Typography>
-          
+
           {/* Balances Row */}
           <Row>
             {/* Savings Balance */}
@@ -25,7 +28,7 @@ const Kid = () => {
               <Typography>Checking:</Typography>
               <Typography>$ 2.32</Typography>
             </Col>
-            
+
             {/* Checking Balance */}
             <Col>
               <Typography>Savings:</Typography>
@@ -53,15 +56,26 @@ const Kid = () => {
               <Typography>Crypto</Typography>
             </Col>
           </Row>
-          
         </Col>
 
         {/* Tasks List */}
         <Col className="align-items-center ">
           <ListGroup as="ol" numbered>
-            <Task price={4.99} name={"Sweep Floor"} infoLine={"More Info"}></Task>
-            <Task price={9.99} name={"Clean Room"} infoLine={"More Info"}></Task>
-            <Task price={6.99} name={"Put Away Dishes"} infoLine={"More Info"}></Task>
+            <Task
+              price={4.99}
+              name={"Sweep Floor"}
+              infoLine={"More Info"}
+            ></Task>
+            <Task
+              price={9.99}
+              name={"Clean Room"}
+              infoLine={"More Info"}
+            ></Task>
+            <Task
+              price={6.99}
+              name={"Put Away Dishes"}
+              infoLine={"More Info"}
+            ></Task>
           </ListGroup>
         </Col>
       </Row>
@@ -79,12 +93,12 @@ const Task = (props) => {
         <div className="fw-bold">{props.name}</div>
         {props.infoLine}
       </div>
-      <CloseIcon className="CloseIcon" style={{display: "none"}}></CloseIcon>
-      <Badge bg="success" pill>
+      <CloseIcon className="CloseIcon" style={{ display: "none" }}></CloseIcon>
+      <Badge bg="danger" pill style={{ color: theme.palette.primary }}>
         ${props.price}
       </Badge>
     </ListGroup.Item>
-  )
-}
+  );
+};
 
 export default Kid;

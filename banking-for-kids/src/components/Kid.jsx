@@ -16,10 +16,6 @@ const Kid = () => {
   taskList.push({ price: 8.99, name: "Vacuum", infoLine: "More Info" })
   console.log(taskList)
 
-  const getTasksFromDB = () => {
-
-  }
-
   return (
     <Container className="Kid-Container">
       <Row>

@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, componentDidMount } from "react";
 import logo from "./logo.svg";
 import "./App.css";
 import Kid from "./components/Kid";
@@ -8,9 +8,46 @@ import { ThemeProvider } from "@material-ui/core/styles";
 import { Toolbar, AppBar, Button, Grid } from "@material-ui/core";
 import theme from "./theme";
 
+var axios = require('axios')
+
+const getTasksFromDB = () => {
+  return new Promise((resolve, reject) => {
+    var data = JSON.stringify({});
+
+    var config = {
+      method: 'PATCH',
+      url: 'https://1u6xfou096.execute-api.us-east-1.amazonaws.com/default/gettersetter_tasks',
+      headers: { 
+        'x-api-key': 'r1rC7mLDKb1Bxc5neUsNt7JtxbSYF9ti3yYUMjkE',
+        'Content-Type': 'application/json'
+      },
+      data : data
+    };
+
+    axios(config)
+      .then(function (response) {
+        resolve(response);
+      })
+      .catch(function (error) {
+        reject(error);
+      });
+  })
+}
+
 function App() {
   /* True if Kid, False if Parent */
   const [kid, setKid] = useState(true);
+  let tasks = []
+
+  useEffect(()=>{
+    getTasksFromDB()
+      .then(response => {
+        console.log(response)
+      })
+      .catch(error => {
+        console.log(error)
+      })
+  }, [])
 
   return (
     <ThemeProvider theme={theme}>

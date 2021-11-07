@@ -103,10 +103,12 @@ export default function SimpleModal({ handleClose, handleOpen }) {
             />
           </Col>
         </Row>
-        <Button onClick={sendToChecking} style={{ marginRight: 20 }}>
-          Send to Savings
-        </Button>
-        <Button onClick={sendToSavings}>Send to Checking</Button>
+        <Col>
+          <Button onClick={sendToChecking} style={{ marginRight: "3%" }}>
+            Send to Savings
+          </Button>
+          <Button onClick={sendToSavings}>Send to Checking</Button>
+        </Col>
       </div>
     </Modal>
   );

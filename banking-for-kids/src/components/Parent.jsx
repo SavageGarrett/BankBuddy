@@ -1,9 +1,8 @@
 import React, { useState } from "react";
-import { Container, Row, Col, ListGroup, Badge } from "react-bootstrap";
+import { Container, Row, Col, ListGroup } from "react-bootstrap";
 import {
   Typography,
   Button,
-  Grid,
   Card,
   TextField,
   Box,
@@ -67,6 +66,7 @@ const Parent = (props) => {
   return (
     <Container>
       <Card style={{ backgroundColor: theme.palette.primary, padding: 40 }}>
+        {/* Headline Text */}
         <Row>
           <Typography variant="body1">Task Portal</Typography>
           <Typography variant="h1">
@@ -74,8 +74,9 @@ const Parent = (props) => {
             points it's worth and you're all set!
           </Typography>
         </Row>
-        <Row>
 
+        {/* Task Row */}
+        <Row style={{marginTop: "40px"}}>
           {/* Loop Through Task State Value */}
           {props.tasks.map(({price, name, infoLine, id, completed}) => {
             return <Task key={id} name={name} price={price} infoLine={infoLine}></Task>
@@ -86,20 +87,25 @@ const Parent = (props) => {
             label="Title"
             value={title.toString()}
             onChange={handleTitle}
+            style={{marginTop: "20px"}}
           />
           <TextField
             label="Description"
             value={description.toString()}
             onChange={handleDescription}
+            style={{marginTop: "20px"}}
           />
           <Col>
             <TextField
               label="Cost (dollars)"
               value={number.toString()}
               onChange={handleNumber}
+              style={{marginTop: "20px"}}
             />
           </Col>
         </Row>
+
+        {/* Submit Task */}
         <Box mt={5}>
           <Button
             disabled={false}
@@ -110,16 +116,11 @@ const Parent = (props) => {
           </Button>
         </Box>
       </Card>
-      {/* Tasks List */}
-      <Col className="align-items-center ">
-        <ListGroup as="ol" numbered>
-          
-        </ListGroup>
-      </Col>
     </Container>
   );
 };
 
+/* Parent Task Component */
 const Task = (props) => {
   return (
     <ListGroup.Item

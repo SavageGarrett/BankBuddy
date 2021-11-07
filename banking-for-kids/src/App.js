@@ -69,7 +69,7 @@ function App() {
             <Grid container>
               <Grid item xs={6}>
                 <Button color="inherit" onClick={() => setKid(true)}>
-                  Kid Account
+                  Child Account
                 </Button>
               </Grid>
               <Grid item xs={6}>
@@ -78,7 +78,7 @@ function App() {
             </Grid>
           </Toolbar>
         </AppBar>
-        {kid ? <Kid /> : <Parent tasks={tasks} />}
+        {kid ? <Kid tasks={tasks} /> : <Parent tasks={tasks} />}
       </div>
     </ThemeProvider>
   );

@@ -9,7 +9,7 @@ import theme from "../theme";
 
 import "./Task.css";
 
-const Kid = () => {
+const Kid = (props) => {
   let taskList = [];
   taskList.push({ price: 3.99, name: "Do Dishes", infoLine: "More Info" });
   taskList.push({ price: 6.99, name: "Clean Room", infoLine: "More Info" });
@@ -22,7 +22,7 @@ const Kid = () => {
     });
 
     var config = {
-      method: "get",
+      method: "GET",
       url: "https://c7j9xga7y9.execute-api.us-east-1.amazonaws.com/default/gettersetter",
       headers: {
         "x-api-key": "hkW0Vha0KA8GH60qfJmv88h8EAJx8VNp5Fgpem2G",
@@ -93,10 +93,10 @@ const Kid = () => {
         {/* Tasks List */}
         <Col className="align-items-center ">
           <ListGroup as="ol" numbered>
-            {taskList.map(({ price, name, infoLine }) => {
+            {props.tasks.map(({ price, name, infoLine, id }) => {
               return (
                 <Task
-                  key={name}
+                  key={id}
                   price={price}
                   name={name}
                   infoLine={infoLine}

@@ -3,10 +3,10 @@ import logging
 import psycopg2
 import json
 #rds settings
-rds_host  = "database-1.c5nd4goqrleo.us-east-2.rds.amazonaws.com"
-name = "ttl24"
-password = "TTTTLLLL"
-db_name = "postgres"
+rds_host  = 
+name = 
+password = 
+db_name =
 
 def lambda_handler(event, context):
     logger = logging.getLogger()

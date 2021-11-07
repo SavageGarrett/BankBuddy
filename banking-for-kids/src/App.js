@@ -11,7 +11,7 @@ var axios = require('axios')
 function App() {
   /* True if Kid, False if Parent */
   const [kid, setKid] = useState(true);
-  const [tasks, setTasks] = useState(Array(Array(5)))
+  const [tasks, setTasks] = useState(Array({}))
   
 
   const getTasksFromDB = () => {
@@ -41,12 +41,24 @@ function App() {
   useEffect(()=>{
     getTasksFromDB()
       .then(response => {
-        console.log(response.data)
+        let toArrOfObj = [];
+
+        for (let i of response)
+        {
+          toArrOfObj.push({
+            name: i[0],
+            price: i[1],
+            completed: i[2],
+            infoLine: i[3],
+            id: i[4]
+          })
+        }
+
+        setTasks(toArrOfObj)
       })
       .catch(error => {
         console.log(error)
       })
-    console.log(tasks)
   }, [])
 
   return (
@@ -66,7 +78,7 @@ function App() {
             </Grid>
           </Toolbar>
         </AppBar>
-        {kid ? <Kid/> : <Parent />}
+        {kid ? <Kid /> : <Parent tasks={tasks} />}
       </div>
     </ThemeProvider>
   );

@@ -12,7 +12,7 @@ import "./Task.css";
 import theme from "../theme";
 import CloseIcon from "@mui/icons-material/Close";
 
-const Parent = () => {
+const Parent = (props) => {
   //   const [openModal, setOpenModal] = useState(false);
   const [description, setDescription] = useState("");
   const [number, setNumber] = useState("$");
@@ -56,6 +56,13 @@ const Parent = () => {
           </Typography>
         </Row>
         <Row>
+
+          {/* Loop Through Task State Value */}
+          {props.tasks.map(({price, name, infoLine, id, completed}) => {
+            return <Task key={id} name={name} price={price} infoLine={infoLine}></Task>
+          })}
+
+          {/* Add Task */}
           <TextField
             label="Title"
             value={title.toString()}
@@ -83,13 +90,7 @@ const Parent = () => {
       {/* Tasks List */}
       <Col className="align-items-center ">
         <ListGroup as="ol" numbered>
-          <Task name={"Sweep Floor"} infoLine={"More Info"}></Task>
-          <Task name={"Clean Room"} infoLine={"More Info"}></Task>
-          <Task
-            price={6.99}
-            name={"Put Away Dishes"}
-            infoLine={"More Info"}
-          ></Task>
+          
         </ListGroup>
       </Col>
     </Container>

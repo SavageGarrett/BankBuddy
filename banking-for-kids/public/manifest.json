@@ -1,6 +1,6 @@
 {
-  "short_name": "React App",
-  "name": "Create React App Sample",
+  "short_name": "Bank Buddy",
+  "name": "A platform for teaching online banking to kids aged 8 - 12.",
   "icons": [
     {
       "src": "favicon.ico",

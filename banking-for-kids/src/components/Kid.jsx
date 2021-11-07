@@ -90,7 +90,7 @@ const Kid = (props) => {
         {/* Tasks List */}
         <Col className="align-items-center ">
           <ListGroup as="ol" numbered>
-            {props.tasks.map(({ price, name, infoLine, id }) => {
+            {props.tasks.filter(tasks => tasks.completed == false).map(({ price, name, infoLine, id }) => {
               return (
                 <Task
                   key={id}

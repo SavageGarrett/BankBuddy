@@ -63,6 +63,8 @@ const Parent = (props) => {
   const handleTitle = (e) => {
     setTitle(e.target.value);
   };
+
+
   return (
     <Container>
       <Card style={{ backgroundColor: theme.palette.primary, padding: 40 }}>
@@ -78,8 +80,8 @@ const Parent = (props) => {
         {/* Task Row */}
         <Row style={{marginTop: "40px"}}>
           {/* Loop Through Task State Value */}
-          {props.tasks.map(({price, name, infoLine, id, completed}) => {
-            return <Task key={id} name={name} price={price} infoLine={infoLine}></Task>
+          {props.tasks.filter(tasks => tasks.completed == false).map(({price, name, infoLine, id, completed}) => {
+            return <Task key={id} id={id} name={name} price={price} infoLine={infoLine}></Task>
           })}
 
           {/* Add Task */}
@@ -122,6 +124,33 @@ const Parent = (props) => {
 
 /* Parent Task Component */
 const Task = (props) => {
+  const completeTask = (id, task_price) => {
+    var data = JSON.stringify({
+      "complete": true,
+      "cur_value": task_price,
+      "task_id": id
+    });
+
+    var config = {
+      method: 'post',
+      url: 'https://1u6xfou096.execute-api.us-east-1.amazonaws.com/default/gettersetter_tasks',
+      headers: { 
+        'x-api-key': 'r1rC7mLDKb1Bxc5neUsNt7JtxbSYF9ti3yYUMjkE', 
+        'Content-Type': 'application/json'
+      },
+      data : data
+    };
+
+    axios(config)
+      .then(function (response) {
+        console.log(JSON.stringify(response.data));
+      })
+      .catch(function (error) {
+        console.log(error);
+      });
+  }
+
+
   return (
     <ListGroup.Item
       style={{ hover: "none" }}
@@ -133,7 +162,7 @@ const Task = (props) => {
         {props.infoLine}
       </div>
       <CloseIcon className="CloseIcon" style={{ display: "none" }}></CloseIcon>
-      <Button>Pay</Button>
+      <Button onClick={() => completeTask(props.id, props.price)} >Pay</Button>
     </ListGroup.Item>
   );
 };

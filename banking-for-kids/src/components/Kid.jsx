@@ -1,16 +1,17 @@
 import React, { useEffect, useState } from "react";
 import { Container, Row, Col, Image, ListGroup, Badge } from "react-bootstrap";
-import { Typography } from "@material-ui/core";
+import { Typography, Card, IconButton } from "@material-ui/core";
 import ShowChartIcon from "@mui/icons-material/ShowChart";
-import BusinessCenterIcon from "@mui/icons-material/BusinessCenter";
-import MonetizationOnIcon from "@mui/icons-material/MonetizationOn";
+import AttachMoneyIcon from "@mui/icons-material/AttachMoney";
 import CloseIcon from "@mui/icons-material/Close";
+import SimpleModal from "../components/ParentComponents/SimpleModal";
 import theme from "../theme";
 import "./Task.css";
 var axios = require("axios");
 
 const Kid = (props) => {
   const [kidInfo, setKidInfo] = useState([]);
+  const [showStocksPage, setShowStocksPage] = useState(false);
   let taskList = [];
   taskList.push({ price: 3.99, name: "Do Dishes", infoLine: "More Info" });
   taskList.push({ price: 6.99, name: "Clean Room", infoLine: "More Info" });
@@ -39,70 +40,75 @@ const Kid = (props) => {
   }, []);
 
   return (
-    <Container className="Kid-Container">
-      <Row>
-        <Col className="align-items-center">
-          {/* Profile Image and Name */}
-          <Image
-            style={{ width: "120px", height: "120px", borderRadius: "60px" }}
-            src="img/kid-1.jpg"
-          ></Image>
-          {/* TODO: Fix Undefined Display if We Get to It */}
-          {!!kidInfo ? <Typography>{`${kidInfo[1]} ${kidInfo[5]}`}</Typography> : <></>}
+    <Container style={{ paddingTop: 50, flexDirection: "column" }}>
+      <Card style={{ margin: 50 }}>
+        {/* Profile Image and Name */}
+        <Image
+          style={{ width: "120px", height: "120px", borderRadius: "60px" }}
+          src="img/kid-1.jpg"
+        ></Image>
+        {/* TODO: Fix Undefined Display if We Get to It */}
+        {!!kidInfo ? (
+          <Typography variant="body1">{`${kidInfo[1]} ${kidInfo[5]}`}</Typography>
+        ) : (
+          <></>
+        )}
 
-          {/* Balances Row */}
-          <Row>
-            {/* Savings Balance */}
-            <Col>
-              <Typography>Checking:</Typography>
-              <Typography>$ {kidInfo[2]}</Typography>
-            </Col>
+        {/* Stocks */}
+        {/* <IconButton
+          onClick={() => setShowStocksPage(true)}
+          style={{ width: 100, color: "red" }}
+        >
+          <Col>
+            <ShowChartIcon></ShowChartIcon>
+            <Typography style={{ textDecorator: "underline" }}>
+              Stocks
+            </Typography>
+          </Col>
+        </IconButton> */}
 
-            {/* Checking Balance */}
-            <Col>
-              <Typography>Savings:</Typography>
-              <Typography>$ {kidInfo[3]}</Typography>
-            </Col>
-          </Row>
+        {/* Transfer */}
+        <IconButton
+          onClick={() => setShowStocksPage(true)}
+          style={{ width: 280, color: "red" }}
+        >
+          <Col>
+            <AttachMoneyIcon />
+            <Typography style={{ textDecorator: "underline" }}>
+              Transfer Money
+            </Typography>
+          </Col>
+        </IconButton>
+        {showStocksPage && (
+          <SimpleModal
+            handleClose={() => setShowStocksPage(false)}
+            handleOpen={() => setShowStocksPage(true)}
+          />
+        )}
+        {/* Balances Row */}
+        <Row>
+          {/* Savings Balance */}
+          <Col>
+            <Typography variant="h1">Checking:</Typography>
+            <Typography variant="body1">$ {kidInfo[2]}</Typography>
+          </Col>
 
-          {/* Stocks Row */}
-          <Row>
-            {/* Stocks */}
-            <Col>
-              <ShowChartIcon></ShowChartIcon>
-              <Typography>Stocks</Typography>
-            </Col>
-
-            {/* Bonds */}
-            <Col>
-              <BusinessCenterIcon></BusinessCenterIcon>
-              <Typography>Bonds</Typography>
-            </Col>
-
-            {/* Crypto */}
-            <Col>
-              <MonetizationOnIcon></MonetizationOnIcon>
-              <Typography>Crypto</Typography>
-            </Col>
-          </Row>
-        </Col>
-
-        {/* Tasks List */}
-        <Col className="align-items-center ">
-          <ListGroup as="ol" numbered>
-            {props.tasks.filter(tasks => tasks.completed == false).map(({ price, name, infoLine, id }) => {
-              return (
-                <Task
-                  key={id}
-                  price={price}
-                  name={name}
-                  infoLine={infoLine}
-                ></Task>
-              );
-            })}
-          </ListGroup>
-        </Col>
-      </Row>
+          {/* Checking Balance */}
+          <Col>
+            <Typography variant="h1">Savings:</Typography>
+            <Typography variant="body1">$ {kidInfo[3]}</Typography>
+          </Col>
+        </Row>
+      </Card>
+          
+      {/* Tasks List */}
+      <ListGroup as="ol" numbered>
+        {props.tasks.filter(tasks => tasks.completed == false).map(({ price, name, infoLine, id }) => {
+          return (
+            <Task key={id} price={price} name={name} infoLine={infoLine}></Task>
+          );
+        })}
+      </ListGroup>
     </Container>
   );
 };
@@ -113,8 +119,8 @@ const Task = (props) => {
       as="li"
       className="Chore-Item d-flex justify-content-between align-items-start"
     >
-      <div className="ms-2 me-auto">
-        <div className="fw-bold">{props.name}</div>
+      <div className="ms-2 me-auto align-items-start">
+        <div className="Left-Align fw-bold">{props.name}</div>
         {props.infoLine}
       </div>
       <CloseIcon className="CloseIcon" style={{ display: "none" }}></CloseIcon>

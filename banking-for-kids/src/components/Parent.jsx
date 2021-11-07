@@ -158,7 +158,7 @@ const Task = (props) => {
       className="Chore-Item d-flex justify-content-between align-items-start"
     >
       <div className="ms-2 me-auto">
-        <div className="fw-bold">{props.name}</div>
+        <div className="Left-Align fw-bold">{props.name}</div>
         {props.infoLine}
       </div>
       <CloseIcon className="CloseIcon" style={{ display: "none" }}></CloseIcon>

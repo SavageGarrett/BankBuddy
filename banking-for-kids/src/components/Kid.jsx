@@ -6,21 +6,20 @@ import BusinessCenterIcon from "@mui/icons-material/BusinessCenter";
 import MonetizationOnIcon from "@mui/icons-material/MonetizationOn";
 import CloseIcon from "@mui/icons-material/Close";
 import theme from "../theme";
-
 import "./Task.css";
+var axios = require("axios");
 
 const Kid = (props) => {
+  const [kidInfo, setKidInfo] = useState([]);
   let taskList = [];
   taskList.push({ price: 3.99, name: "Do Dishes", infoLine: "More Info" });
   taskList.push({ price: 6.99, name: "Clean Room", infoLine: "More Info" });
   taskList.push({ price: 8.99, name: "Vacuum", infoLine: "More Info" });
 
   useEffect(() => {
-    var axios = require("axios");
     var data = JSON.stringify({
       user_id: 2,
     });
-
     var config = {
       method: "GET",
       url: "https://c7j9xga7y9.execute-api.us-east-1.amazonaws.com/default/gettersetter",
@@ -28,19 +27,16 @@ const Kid = (props) => {
         "x-api-key": "hkW0Vha0KA8GH60qfJmv88h8EAJx8VNp5Fgpem2G",
         "Content-Type": "application/json",
       },
-      data: JSON.stringify({
-        user_id: 2,
-      }),
+      data: data,
     };
-
     axios(config)
       .then(function (response) {
-        console.log(JSON.stringify(response.data));
+        setKidInfo(response.data);
       })
       .catch(function (error) {
         console.log(error);
       });
-  });
+  }, []);
 
   return (
     <Container className="Kid-Container">
@@ -51,20 +47,20 @@ const Kid = (props) => {
             style={{ width: "120px", height: "120px", borderRadius: "60px" }}
             src="img/kid-1.jpg"
           ></Image>
-          <Typography>Harold Smith</Typography>
+          <Typography>{`${kidInfo[1]} ${kidInfo[5]}`}</Typography>
 
           {/* Balances Row */}
           <Row>
             {/* Savings Balance */}
             <Col>
               <Typography>Checking:</Typography>
-              <Typography>$ 2.32</Typography>
+              <Typography>$ {kidInfo[2]}</Typography>
             </Col>
 
             {/* Checking Balance */}
             <Col>
               <Typography>Savings:</Typography>
-              <Typography>$ 3.24</Typography>
+              <Typography>$ {kidInfo[3]}</Typography>
             </Col>
           </Row>
 

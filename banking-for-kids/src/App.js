@@ -6,7 +6,7 @@ import { ThemeProvider } from "@material-ui/core/styles";
 import { Toolbar, AppBar, Button, Grid } from "@material-ui/core";
 import theme from "./theme";
 
-var axios = require('axios')
+var axios = require("axios");
 
 function App() {
   /* True if Kid, False if Parent */
@@ -14,20 +14,41 @@ function App() {
   const [tasks, setTasks] = useState(Array({}))
   
 
+  useEffect(() => {
+    var data = JSON.stringify({
+      user_id: 2,
+    });
+    var config = {
+      method: "GET",
+      url: "https://c7j9xga7y9.execute-api.us-east-1.amazonaws.com/default/gettersetter",
+      headers: {
+        "x-api-key": "hkW0Vha0KA8GH60qfJmv88h8EAJx8VNp5Fgpem2G",
+        "Content-Type": "application/json",
+      },
+      data: data,
+    };
+    axios(config)
+      .then(function (response) {
+        console.log(JSON.stringify(response.data));
+      })
+      .catch(function (error) {
+        console.log(error);
+      });
+  });
   const getTasksFromDB = () => {
     return new Promise((resolve, reject) => {
       var data = JSON.stringify({});
-  
+
       var config = {
-        method: 'PATCH',
-        url: 'https://1u6xfou096.execute-api.us-east-1.amazonaws.com/default/gettersetter_tasks',
-        headers: { 
-          'x-api-key': 'r1rC7mLDKb1Bxc5neUsNt7JtxbSYF9ti3yYUMjkE',
-          'Content-Type': 'application/json'
+        method: "PATCH",
+        url: "https://1u6xfou096.execute-api.us-east-1.amazonaws.com/default/gettersetter_tasks",
+        headers: {
+          "x-api-key": "r1rC7mLDKb1Bxc5neUsNt7JtxbSYF9ti3yYUMjkE",
+          "Content-Type": "application/json",
         },
-        data : data
+        data: data,
       };
-  
+
       axios(config)
         .then(function (response) {
           resolve(response.data);
@@ -35,10 +56,10 @@ function App() {
         .catch(function (error) {
           reject(error);
         });
-    })
-  }
+    });
+  };
 
-  useEffect(()=>{
+  useEffect(() => {
     getTasksFromDB()
       .then(response => {
         let toArrOfObj = [];

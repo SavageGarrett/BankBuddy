@@ -1,52 +1,52 @@
-import React, { useState, useEffect, componentDidMount } from "react";
-import logo from "./logo.svg";
+import React, { useState, useEffect } from "react";
 import "./App.css";
 import Kid from "./components/Kid";
 import Parent from "./components/Parent";
-import { Nav } from "react-bootstrap";
 import { ThemeProvider } from "@material-ui/core/styles";
 import { Toolbar, AppBar, Button, Grid } from "@material-ui/core";
 import theme from "./theme";
 
 var axios = require('axios')
 
-const getTasksFromDB = () => {
-  return new Promise((resolve, reject) => {
-    var data = JSON.stringify({});
-
-    var config = {
-      method: 'PATCH',
-      url: 'https://1u6xfou096.execute-api.us-east-1.amazonaws.com/default/gettersetter_tasks',
-      headers: { 
-        'x-api-key': 'r1rC7mLDKb1Bxc5neUsNt7JtxbSYF9ti3yYUMjkE',
-        'Content-Type': 'application/json'
-      },
-      data : data
-    };
-
-    axios(config)
-      .then(function (response) {
-        resolve(response);
-      })
-      .catch(function (error) {
-        reject(error);
-      });
-  })
-}
-
 function App() {
   /* True if Kid, False if Parent */
   const [kid, setKid] = useState(true);
-  let tasks = []
+  const [tasks, setTasks] = useState(Array(Array(5)))
+  
+
+  const getTasksFromDB = () => {
+    return new Promise((resolve, reject) => {
+      var data = JSON.stringify({});
+  
+      var config = {
+        method: 'PATCH',
+        url: 'https://1u6xfou096.execute-api.us-east-1.amazonaws.com/default/gettersetter_tasks',
+        headers: { 
+          'x-api-key': 'r1rC7mLDKb1Bxc5neUsNt7JtxbSYF9ti3yYUMjkE',
+          'Content-Type': 'application/json'
+        },
+        data : data
+      };
+  
+      axios(config)
+        .then(function (response) {
+          resolve(response.data);
+        })
+        .catch(function (error) {
+          reject(error);
+        });
+    })
+  }
 
   useEffect(()=>{
     getTasksFromDB()
       .then(response => {
-        console.log(response)
+        console.log(response.data)
       })
       .catch(error => {
         console.log(error)
       })
+    console.log(tasks)
   }, [])
 
   return (

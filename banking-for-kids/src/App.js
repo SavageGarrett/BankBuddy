@@ -25,7 +25,7 @@ function App() {
         </Nav>
 
         <p>Select who You Are:</p>
-        {kid ? <Kid /> : <Parent />}
+        {kid ? <Kid/> : <Parent />}
       </div>
     </ThemeProvider>
   );

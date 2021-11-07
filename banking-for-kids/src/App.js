@@ -23,9 +23,7 @@ function App() {
             <Nav.Link onClick={() => setKid(true)}>Kid</Nav.Link>
           </Nav.Item>
         </Nav>
-
-        <p>Select who You Are:</p>
-        {kid ? <Kid/> : <Parent />}
+        {kid ? <Kid /> : <Parent />}
       </div>
     </ThemeProvider>
   );

@@ -1,7 +1,6 @@
 import React, { useEffect, useState } from "react";
 import { Container, Row, Col, Image, ListGroup, Badge } from "react-bootstrap";
 import { Typography, Card, IconButton } from "@material-ui/core";
-import ShowChartIcon from "@mui/icons-material/ShowChart";
 import AttachMoneyIcon from "@mui/icons-material/AttachMoney";
 import CloseIcon from "@mui/icons-material/Close";
 import SimpleModal from "../components/ParentComponents/SimpleModal";
@@ -103,7 +102,7 @@ const Kid = (props) => {
           
       {/* Tasks List */}
       <ListGroup as="ol" numbered>
-        {props.tasks.filter(tasks => tasks.completed == false).map(({ price, name, infoLine, id }) => {
+        {props.tasks.filter(tasks => tasks.completed === false).map(({ price, name, infoLine, id }) => {
           return (
             <Task key={id} price={price} name={name} infoLine={infoLine}></Task>
           );

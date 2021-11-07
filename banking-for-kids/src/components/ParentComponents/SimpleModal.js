@@ -3,10 +3,6 @@ import { makeStyles } from "@material-ui/core/styles";
 import { Modal, Typography, Button, TextField } from "@material-ui/core";
 import { Row, Col } from "react-bootstrap";
 
-function rand() {
-  return Math.round(Math.random() * 20) - 10;
-}
-
 const useStyles = makeStyles((theme) => ({
   modal: {
     alignItems: "center",

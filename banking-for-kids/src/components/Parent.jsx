@@ -80,7 +80,7 @@ const Parent = (props) => {
         {/* Task Row */}
         <Row style={{marginTop: "40px"}}>
           {/* Loop Through Task State Value */}
-          {props.tasks.filter(tasks => tasks.completed == false).map(({price, name, infoLine, id, completed}) => {
+          {props.tasks.filter(tasks => tasks.completed === false).map(({price, name, infoLine, id, completed}) => {
             return <Task key={id} id={id} name={name} price={price} infoLine={infoLine}></Task>
           })}
 

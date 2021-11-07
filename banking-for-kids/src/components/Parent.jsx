@@ -11,18 +11,15 @@ import {
 import "./Task.css";
 import theme from "../theme";
 import CloseIcon from "@mui/icons-material/Close";
+var axios = require("axios");
 
 const Parent = (props) => {
   //   const [openModal, setOpenModal] = useState(false);
   const [description, setDescription] = useState("");
   const [number, setNumber] = useState(0);
   const [title, setTitle] = useState("");
-  const [taskList, setTaskList] = useState([]);
-
-  let tasks = [];
 
   const addTask = () => {
-    var axios = require("axios");
     var data = JSON.stringify({
       task_name: title,
       cur_value: number,
@@ -31,7 +28,7 @@ const Parent = (props) => {
     });
 
     var config = {
-      method: "put",
+      method: "PUT",
       url: "https://1u6xfou096.execute-api.us-east-1.amazonaws.com/default/gettersetter_tasks",
       headers: {
         "x-api-key": "r1rC7mLDKb1Bxc5neUsNt7JtxbSYF9ti3yYUMjkE",
@@ -48,9 +45,9 @@ const Parent = (props) => {
         console.log(error);
       });
 
-    tasks.push({
-      title: title,
-      description: description,
+    props.tasks.push({
+      name: title,
+      infoLine: description,
       price: number,
       completed: false,
     });
@@ -105,7 +102,7 @@ const Parent = (props) => {
         </Row>
         <Box mt={5}>
           <Button
-            disabled={true}
+            disabled={false}
             style={{ textTransform: "none" }}
             onClick={addTask}
           >

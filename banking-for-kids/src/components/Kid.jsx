@@ -47,7 +47,8 @@ const Kid = (props) => {
             style={{ width: "120px", height: "120px", borderRadius: "60px" }}
             src="img/kid-1.jpg"
           ></Image>
-          <Typography>{`${kidInfo[1]} ${kidInfo[5]}`}</Typography>
+          {/* TODO: Fix Undefined Display if We Get to It */}
+          {!!kidInfo ? <Typography>{`${kidInfo[1]} ${kidInfo[5]}`}</Typography> : <></>}
 
           {/* Balances Row */}
           <Row>

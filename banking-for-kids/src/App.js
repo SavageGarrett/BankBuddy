@@ -11,7 +11,6 @@ import theme from "./theme";
 function App() {
   /* True if Kid, False if Parent */
   const [kid, setKid] = useState(true);
-  const [taskList, setTaskList] = useState([]);
 
   return (
     <ThemeProvider theme={theme}>
@@ -30,7 +29,7 @@ function App() {
             </Grid>
           </Toolbar>
         </AppBar>
-        {kid ? <Kid /> : <Parent />}
+        {kid ? <Kid/> : <Parent />}
       </div>
     </ThemeProvider>
   );

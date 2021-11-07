@@ -1,4 +1,4 @@
-import React from "react";
+import React, {useState} from "react";
 import { Container, Row, Col, Image, ListGroup, Badge } from "react-bootstrap";
 import { Typography } from "@material-ui/core";
 import ShowChartIcon from "@mui/icons-material/ShowChart";
@@ -10,6 +10,16 @@ import theme from "../theme";
 import "./Task.css";
 
 const Kid = () => {
+  let taskList = [];
+  taskList.push({ price: 3.99, name: "Do Dishes", infoLine: "More Info" })
+  taskList.push({ price: 6.99, name: "Clean Room", infoLine: "More Info" })
+  taskList.push({ price: 8.99, name: "Vacuum", infoLine: "More Info" })
+  console.log(taskList)
+
+  const getTasksFromDB = () => {
+
+  }
+
   return (
     <Container className="Kid-Container">
       <Row>
@@ -61,21 +71,9 @@ const Kid = () => {
         {/* Tasks List */}
         <Col className="align-items-center ">
           <ListGroup as="ol" numbered>
-            <Task
-              price={4.99}
-              name={"Sweep Floor"}
-              infoLine={"More Info"}
-            ></Task>
-            <Task
-              price={9.99}
-              name={"Clean Room"}
-              infoLine={"More Info"}
-            ></Task>
-            <Task
-              price={6.99}
-              name={"Put Away Dishes"}
-              infoLine={"More Info"}
-            ></Task>
+            {taskList.map(({price, name, infoLine}) => {
+              return <Task key={name} price={price} name={name} infoLine={infoLine}></Task>
+            })}
           </ListGroup>
         </Col>
       </Row>

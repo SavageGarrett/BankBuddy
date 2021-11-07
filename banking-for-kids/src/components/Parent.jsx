@@ -15,15 +15,39 @@ import CloseIcon from "@mui/icons-material/Close";
 const Parent = () => {
   //   const [openModal, setOpenModal] = useState(false);
   const [description, setDescription] = useState("");
-  const [number, setNumber] = useState("$");
+  const [number, setNumber] = useState(0);
   const [title, setTitle] = useState("");
   const [taskList, setTaskList] = useState([]);
 
   let tasks = [];
 
   const addTask = () => {
-    console.log(description);
-    //post task
+    var axios = require("axios");
+    var data = JSON.stringify({
+      task_name: title,
+      cur_value: number,
+      complete: false,
+      more_info: description,
+    });
+
+    var config = {
+      method: "put",
+      url: "https://1u6xfou096.execute-api.us-east-1.amazonaws.com/default/gettersetter_tasks",
+      headers: {
+        "x-api-key": "r1rC7mLDKb1Bxc5neUsNt7JtxbSYF9ti3yYUMjkE",
+        "Content-Type": "application/json",
+      },
+      data: data,
+    };
+
+    axios(config)
+      .then(function (response) {
+        console.log(JSON.stringify(response.data));
+      })
+      .catch(function (error) {
+        console.log(error);
+      });
+
     tasks.push({
       title: title,
       description: description,
@@ -32,9 +56,7 @@ const Parent = () => {
     });
     setDescription("");
     setTitle("");
-    setNumber("$");
-
-    console.log(tasks);
+    setNumber(0);
   };
   const handleDescription = (e) => {
     setDescription(e.target.value);
@@ -75,7 +97,11 @@ const Parent = () => {
           </Col>
         </Row>
         <Box mt={5}>
-          <Button style={{ textTransform: "none" }} onClick={addTask}>
+          <Button
+            disabled={true}
+            style={{ textTransform: "none" }}
+            onClick={addTask}
+          >
             Post Task
           </Button>
         </Box>
